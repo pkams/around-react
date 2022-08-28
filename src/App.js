@@ -1,3 +1,5 @@
+import React from "react";
+
 import Header from "./components/Header.js";
 import Main from "./components/Main.js";
 import Footer from "./components/Footer.js";
@@ -6,6 +8,28 @@ import ImagePopup from "./components/ImagePopup.js";
 import "./index.css";
 
 function App() {
+  const [isEditProfilePopupOpen, setEditProfilePopupOpen] =
+    React.useState(false);
+  const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
+
+  function handleEditAvatarClick() {
+    const popup = document.querySelector(".popup_edit-avatar-photo");
+    popup.classList.add("popup_opened");
+  }
+
+  function handleEditProfileClick() {
+    const popup = document.querySelector(".popup_edit-profile");
+    popup.classList.add("popup_opened");
+  }
+
+  function handleAddPlaceClick() {
+    const popup = document.querySelector(".popup_add-card");
+    popup.classList.add("popup_opened");
+  }
+
+  function handleCardClick() {}
+
   return (
     <>
       {/*
@@ -213,7 +237,12 @@ function App() {
           </button>
         </PopupWithForm>
         <Header />
-        <Main />
+        <Main
+          onEditAvatarClick={handleEditAvatarClick}
+          onEditProfileClick={handleEditProfileClick}
+          onAddPlaceClick={handleAddPlaceClick}
+          onCardClick={handleCardClick}
+        />
         <Footer />
       </div>
       <template id="card-template" />
