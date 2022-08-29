@@ -1,6 +1,6 @@
 # Projeto: Around The U.S do Bootcamp Web Dev da Yandex by Practicum (Versão React App)
 
-Site de página única feito utilizando **HTML + CSS + Javascript + React** para estudos dos módulos de **Getting Started with Create React App**.
+Site de página única feito utilizando **HTML + CSS + Javascript + React** para estudos dos módulos **Getting Started with Create React App**.
 
 O projeto foi construído visando a implementação de features de forma incremental a fim de estudar as tecnologias aprendidas em cada módulo do curso.
 O projeto em questão é uma continuidade do que foi desenvolvido usando vanilla JS em módulo anterior, e o objetivo deste módulo é recriar o projeto utilizando conceitos de desenvolvimento com a biblioteca React. A versão anterior do projeto pode ser encontrada em:
