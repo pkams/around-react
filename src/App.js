@@ -14,21 +14,24 @@ function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
 
   function handleEditAvatarClick() {
-    const popup = document.querySelector(".popup_edit-avatar-photo");
-    popup.classList.add("popup_opened");
+    setEditAvatarPopupOpen(true);
   }
 
   function handleEditProfileClick() {
-    const popup = document.querySelector(".popup_edit-profile");
-    popup.classList.add("popup_opened");
+    setEditProfilePopupOpen(true);
   }
 
   function handleAddPlaceClick() {
-    const popup = document.querySelector(".popup_add-card");
-    popup.classList.add("popup_opened");
+    setAddPlacePopupOpen(true);
   }
 
   function handleCardClick() {}
+
+  function closeAllPopups() {
+    setAddPlacePopupOpen(false);
+    setEditProfilePopupOpen(false);
+    setEditAvatarPopupOpen(false);
+  }
 
   return (
     <>
@@ -156,7 +159,12 @@ function App() {
 
       {/* Elementos */}
       <div className="main-page">
-        <PopupWithForm name="edit-profile" title="Editar perfil">
+        <PopupWithForm
+          name="edit-profile"
+          title="Editar perfil"
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+        >
           <form className="popup__form">
             <input
               type="text"
@@ -185,7 +193,12 @@ function App() {
             </button>
           </form>
         </PopupWithForm>
-        <PopupWithForm name="add-card" title="Novo Local">
+        <PopupWithForm
+          name="add-card"
+          title="Novo Local"
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+        >
           <form className="popup__form">
             <input
               type="text"
@@ -215,6 +228,8 @@ function App() {
         <PopupWithForm
           name="edit-avatar-photo"
           title="Alterar a foto de perfil"
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
         >
           <form className="popup__form">
             <input
