@@ -1,70 +1,26 @@
-# Getting Started with Create React App
+# Projeto: Around The U.S do Bootcamp Web Dev da Yandex by Practicum (Versão React App)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Site de página única feito utilizando **HTML + CSS + Javascript + React** para estudos dos módulos de **Getting Started with Create React App**.
 
-## Available Scripts
+O projeto foi construído visando a implementação de features de forma incremental a fim de estudar as tecnologias aprendidas em cada módulo do curso.
+O projeto em questão é uma continuidade do que foi desenvolvido usando vanilla JS em módulo anterior, e o objetivo deste módulo é recriar o projeto utilizando conceitos de desenvolvimento com a biblioteca React. A versão anterior do projeto pode ser encontrada em:
+https://github.com/pkams/web_project_4_ptbr
 
-In the project directory, you can run:
+- Etapa 1: O objetivo foi utilizar a biblioteca **React** para recriar o projeto utilizando conceitos de componentes, interações e desenvolvimento utilizando React.
+- O objetivo do projeto nos sprints foi a modificação do conteúdo que aparece em tela, **sem objetivar persistência** após fechamento ou atualização da página.
+- A página foi desenvolvida para responsividade em telas de >=1280px, 768px e 320px.
+
+### Ajustes e melhorias
+
+O projeto ainda está em desenvolvimento e conforme evolução durante o curso poderá ser adicionado mais funcionalidades.
+
+- [ ] Incorporar mais ações e interatividade utilizando Javascript e React.
+- [ ] Backend utilizando JS ou outra tecnologia similar (Python por ex, utilizando Flask ou Django)
+- [ ] Persistência do conteudo dinâmicamente usando banco de dados.
+- [ ] Deploy do site interativo em cloud (AWS/Heroku/Etc)
+
+### Rodando projeto
+
+Para rodar o projeto localmente clone o repositório, instale os pacotes com "npm install" e rode o servidor localmente com:
 
 ### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
