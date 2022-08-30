@@ -12,6 +12,7 @@ function App() {
     React.useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState(false);
 
   function handleEditAvatarClick() {
     setEditAvatarPopupOpen(true);
@@ -25,12 +26,15 @@ function App() {
     setAddPlacePopupOpen(true);
   }
 
-  function handleCardClick() {}
+  function handleCardClick(card) {
+    setSelectedCard(card);
+  }
 
   function closeAllPopups() {
     setAddPlacePopupOpen(false);
     setEditProfilePopupOpen(false);
     setEditAvatarPopupOpen(false);
+    setSelectedCard(false);
   }
 
   return (
@@ -128,6 +132,7 @@ function App() {
             Sim
           </button>
         </PopupWithForm>
+        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
         <Header />
         <Main
           onEditAvatarClick={handleEditAvatarClick}

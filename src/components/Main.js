@@ -14,7 +14,6 @@ function Main(props) {
     api
       .getProfileInformation()
       .then((result) => {
-        console.log(result);
         setUserName(result.name);
         setUserDescription(result.about);
         setUserAvatar(result.avatar);
@@ -29,14 +28,11 @@ function Main(props) {
       .getCards()
       .then((result) => {
         setCards(result);
-        console.log(cards);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-
-  console.log(cards);
 
   return (
     <>
@@ -78,10 +74,11 @@ function Main(props) {
           {cards.slice(0, 6).map((element, id) => {
             return (
               <Card
-                id={element.id}
+                key={id}
                 name={element.name}
                 link={element.link}
                 likes={element.likes}
+                onCardClick={props.onCardClick}
               />
             );
           })}

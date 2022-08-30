@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
+
 /* All main-page and normalize */
 @import url("./vendor/normalize.css");
 @import url("./blocks/main-page/main-page.css");
