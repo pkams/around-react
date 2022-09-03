@@ -7,28 +7,26 @@ function Card(props) {
   }
 
   return (
-    <>
-      <div className="card">
-        <img
-          className="card__image"
-          src={props.link}
-          alt="Imagem do cartão baseada no link inserido pelo usuário."
-          onClick={handleClick}
-        />
-        <div className="card__bottom">
-          <p className="card__text-title">{props.name}</p>
-          <div className="card__like-section">
-            <img
-              className="card__like-button"
-              src={like_icon}
-              alt="Um coração que representa o simbolo de like"
-            />
-            <p className="card__like-count">{props.likes.length}</p>
-          </div>
+    <div className="card">
+      <img
+        className="card__image"
+        src={props.link}
+        alt="Imagem do cartão baseada no link inserido pelo usuário."
+        onClick={handleClick}
+      />
+      <div className="card__bottom">
+        <p className="card__text-title">{props.name}</p>
+        <div className="card__like-section">
+          <img
+            className="card__like-button"
+            src={like_icon}
+            alt="Um coração que representa o simbolo de like"
+          />
+          <p className="card__like-count">{props.likes.length}</p>
         </div>
-        <img className="card__trash-button" src={trash_icon} />
       </div>
-    </>
+      <img className="card__trash-button" src={trash_icon} />
+    </div>
   );
 }
 

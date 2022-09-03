@@ -1,11 +1,11 @@
 import React from "react";
 
-import Header from "./components/Header.js";
-import Main from "./components/Main.js";
-import Footer from "./components/Footer.js";
-import PopupWithForm from "./components/PopupWithForm.js";
-import ImagePopup from "./components/ImagePopup.js";
-import "./index.css";
+import Header from "./Header.js";
+import Main from "./Main.js";
+import Footer from "./Footer.js";
+import PopupWithForm from "./PopupWithForm.js";
+import ImagePopup from "./ImagePopup.js";
+import "../index.css";
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] =
@@ -80,31 +80,29 @@ function App() {
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
         >
-          <form className="popup__form">
-            <input
-              type="text"
-              id="title"
-              name="title"
-              className="popup__form-input"
-              placeholder="Titulo"
-              required=""
-              minLength={2}
-              maxLength={30}
-            />
-            <span className="popup__form-error title-error" />
-            <input
-              type="url"
-              id="image-url"
-              name="image-url"
-              className="popup__form-input"
-              placeholder="Link da imagem"
-              required=""
-            />
-            <span className="popup__form-error image-url-error" />
-            <button className="popup__save-button popup__add-card-save-button popup__save-button_inactive">
-              Salvar
-            </button>
-          </form>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            className="popup__form-input"
+            placeholder="Titulo"
+            required=""
+            minLength={2}
+            maxLength={30}
+          />
+          <span className="popup__form-error title-error" />
+          <input
+            type="url"
+            id="image-url"
+            name="image-url"
+            className="popup__form-input"
+            placeholder="Link da imagem"
+            required=""
+          />
+          <span className="popup__form-error image-url-error" />
+          <button className="popup__save-button popup__add-card-save-button popup__save-button_inactive">
+            Salvar
+          </button>
         </PopupWithForm>
         <PopupWithForm
           name="edit-avatar-photo"
@@ -112,20 +110,18 @@ function App() {
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
         >
-          <form className="popup__form">
-            <input
-              type="url"
-              id="new-image-url"
-              name="new-image-url"
-              className="popup__form-input"
-              placeholder="Link da nova imagem"
-              required=""
-            />
-            <span className="popup__form-error new-image-url-error" />
-            <button className="popup__save-button popup__edit-photo-save-button popup__save-button_inactive">
-              Salvar
-            </button>
-          </form>
+          <input
+            type="url"
+            id="new-image-url"
+            name="new-image-url"
+            className="popup__form-input"
+            placeholder="Link da nova imagem"
+            required=""
+          />
+          <span className="popup__form-error new-image-url-error" />
+          <button className="popup__save-button popup__edit-photo-save-button popup__save-button_inactive">
+            Salvar
+          </button>
         </PopupWithForm>
         <PopupWithForm name="confirm-delete" title="Tem certeza?">
           <button className="popup__save-button popup__confirm-delete">
