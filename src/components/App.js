@@ -46,33 +46,31 @@ function App() {
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
         >
-          <form className="popup__form">
-            <input
-              type="text"
-              id="name"
-              name="name"
-              className="popup__form-input"
-              placeholder="Nome"
-              required=""
-              minLength={2}
-              maxLength={20}
-            />
-            <span className="popup__form-error name-error" />
-            <input
-              type="text"
-              id="job"
-              name="job"
-              className="popup__form-input"
-              placeholder="Sobre mim"
-              required=""
-              minLength={2}
-              maxLength={200}
-            />
-            <span className="popup__form-error job-error" />
-            <button className="popup__save-button popup__save-button_inactive">
-              Salvar
-            </button>
-          </form>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            className="popup__form-input"
+            placeholder="Nome"
+            required=""
+            minLength={2}
+            maxLength={20}
+          />
+          <span className="popup__form-error name-error" />
+          <input
+            type="text"
+            id="job"
+            name="job"
+            className="popup__form-input"
+            placeholder="Sobre mim"
+            required=""
+            minLength={2}
+            maxLength={200}
+          />
+          <span className="popup__form-error job-error" />
+          <button className="popup__save-button popup__save-button_inactive">
+            Salvar
+          </button>
         </PopupWithForm>
         <PopupWithForm
           name="add-card"
