@@ -5,6 +5,8 @@ import Main from "./Main.js";
 import Footer from "./Footer.js";
 import PopupWithForm from "./PopupWithForm.js";
 import ImagePopup from "./ImagePopup.js";
+import { api } from "../utils/api.js";
+import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import "../index.css";
 
 function App() {
@@ -13,6 +15,18 @@ function App() {
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(false);
+  const [currentUser, setCurrentUser] = React.useState({});
+
+  React.useEffect(() => {
+    api
+      .getProfileInformation()
+      .then((result) => {
+        setCurrentUser(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   function handleEditAvatarClick() {
     setEditAvatarPopupOpen(true);
@@ -39,104 +53,106 @@ function App() {
 
   return (
     <>
-      <div className="main-page">
-        <PopupWithForm
-          name="edit-profile"
-          title="Editar perfil"
-          isOpen={isEditProfilePopupOpen}
-          onClose={closeAllPopups}
-        >
-          <input
-            type="text"
-            id="name"
-            name="name"
-            className="popup__form-input"
-            placeholder="Nome"
-            required=""
-            minLength={2}
-            maxLength={20}
+      <CurrentUserContext.Provider value={currentUser}>
+        <div className="main-page">
+          <PopupWithForm
+            name="edit-profile"
+            title="Editar perfil"
+            isOpen={isEditProfilePopupOpen}
+            onClose={closeAllPopups}
+          >
+            <input
+              type="text"
+              id="name"
+              name="name"
+              className="popup__form-input"
+              placeholder="Nome"
+              required=""
+              minLength={2}
+              maxLength={20}
+            />
+            <span className="popup__form-error name-error" />
+            <input
+              type="text"
+              id="job"
+              name="job"
+              className="popup__form-input"
+              placeholder="Sobre mim"
+              required=""
+              minLength={2}
+              maxLength={200}
+            />
+            <span className="popup__form-error job-error" />
+            <button className="popup__save-button popup__save-button_inactive">
+              Salvar
+            </button>
+          </PopupWithForm>
+          <PopupWithForm
+            name="add-card"
+            title="Novo Local"
+            isOpen={isAddPlacePopupOpen}
+            onClose={closeAllPopups}
+          >
+            <input
+              type="text"
+              id="title"
+              name="title"
+              className="popup__form-input"
+              placeholder="Titulo"
+              required=""
+              minLength={2}
+              maxLength={30}
+            />
+            <span className="popup__form-error title-error" />
+            <input
+              type="url"
+              id="image-url"
+              name="image-url"
+              className="popup__form-input"
+              placeholder="Link da imagem"
+              required=""
+            />
+            <span className="popup__form-error image-url-error" />
+            <button className="popup__save-button popup__add-card-save-button popup__save-button_inactive">
+              Salvar
+            </button>
+          </PopupWithForm>
+          <PopupWithForm
+            name="edit-avatar-photo"
+            title="Alterar a foto de perfil"
+            isOpen={isEditAvatarPopupOpen}
+            onClose={closeAllPopups}
+          >
+            <input
+              type="url"
+              id="new-image-url"
+              name="new-image-url"
+              className="popup__form-input"
+              placeholder="Link da nova imagem"
+              required=""
+            />
+            <span className="popup__form-error new-image-url-error" />
+            <button className="popup__save-button popup__edit-photo-save-button popup__save-button_inactive">
+              Salvar
+            </button>
+          </PopupWithForm>
+          <PopupWithForm name="confirm-delete" title="Tem certeza?">
+            <button className="popup__save-button popup__confirm-delete">
+              Sim
+            </button>
+          </PopupWithForm>
+          <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+          <Header />
+          <Main
+            onEditAvatarClick={handleEditAvatarClick}
+            onEditProfileClick={handleEditProfileClick}
+            onAddPlaceClick={handleAddPlaceClick}
+            onCardClick={handleCardClick}
           />
-          <span className="popup__form-error name-error" />
-          <input
-            type="text"
-            id="job"
-            name="job"
-            className="popup__form-input"
-            placeholder="Sobre mim"
-            required=""
-            minLength={2}
-            maxLength={200}
-          />
-          <span className="popup__form-error job-error" />
-          <button className="popup__save-button popup__save-button_inactive">
-            Salvar
-          </button>
-        </PopupWithForm>
-        <PopupWithForm
-          name="add-card"
-          title="Novo Local"
-          isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
-        >
-          <input
-            type="text"
-            id="title"
-            name="title"
-            className="popup__form-input"
-            placeholder="Titulo"
-            required=""
-            minLength={2}
-            maxLength={30}
-          />
-          <span className="popup__form-error title-error" />
-          <input
-            type="url"
-            id="image-url"
-            name="image-url"
-            className="popup__form-input"
-            placeholder="Link da imagem"
-            required=""
-          />
-          <span className="popup__form-error image-url-error" />
-          <button className="popup__save-button popup__add-card-save-button popup__save-button_inactive">
-            Salvar
-          </button>
-        </PopupWithForm>
-        <PopupWithForm
-          name="edit-avatar-photo"
-          title="Alterar a foto de perfil"
-          isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
-        >
-          <input
-            type="url"
-            id="new-image-url"
-            name="new-image-url"
-            className="popup__form-input"
-            placeholder="Link da nova imagem"
-            required=""
-          />
-          <span className="popup__form-error new-image-url-error" />
-          <button className="popup__save-button popup__edit-photo-save-button popup__save-button_inactive">
-            Salvar
-          </button>
-        </PopupWithForm>
-        <PopupWithForm name="confirm-delete" title="Tem certeza?">
-          <button className="popup__save-button popup__confirm-delete">
-            Sim
-          </button>
-        </PopupWithForm>
-        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-        <Header />
-        <Main
-          onEditAvatarClick={handleEditAvatarClick}
-          onEditProfileClick={handleEditProfileClick}
-          onAddPlaceClick={handleAddPlaceClick}
-          onCardClick={handleCardClick}
-        />
-        <Footer />
-      </div>
-      <template id="card-template" />
+          <Footer />
+        </div>
+        <template id="card-template" />
+      </CurrentUserContext.Provider>
     </>
   );
 }

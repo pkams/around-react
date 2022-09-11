@@ -43,6 +43,7 @@
 @import url("./blocks/card/__like-button/card__like-button.css");
 @import url("./blocks/card/__like-count/card__like-count.css");
 @import url("./blocks/card/__trash-button/card__trash-button.css");
+@import url("./blocks//card/__trash-button/_hidden/card__trash-button_hidden.css");
 @import url("./blocks/card/__like-button/_clicked/card__like-button_clicked.css");
 @import url("./blocks/card/__text-title/card__text-title.css");
 
