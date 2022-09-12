@@ -12,6 +12,10 @@ function Card(props) {
     props.onCardLike(props);
   }
 
+  function handleDeleteClick() {
+    props.onCardDelete(props);
+  }
+
   // Pegando contexto do usuário
   const currentUser = React.useContext(CurrentUserContext);
 
@@ -51,7 +55,11 @@ function Card(props) {
           <p className="card__like-count">{props.likes.length}</p>
         </div>
       </div>
-      <img className={cardDeleteButtonClassName} src={trash_icon} />
+      <img
+        className={cardDeleteButtonClassName}
+        src={trash_icon}
+        onClick={handleDeleteClick}
+      />
     </div>
   );
 }

@@ -6,42 +6,7 @@ import { api } from "../utils/api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 function Main(props) {
-  function handleCardLike(card) {
-    // Verifique mais uma vez se esse cartão já foi curtido
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
-
-    console.log(isLiked);
-
-    // Envie uma solicitação para a API e obtenha os dados do cartão atualizados
-    if (isLiked) {
-      api.unfavoriteCard(card._id).then((newCard) => {
-        setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
-        );
-      });
-    } else {
-      api.favoriteCard(card._id).then((newCard) => {
-        setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
-        );
-      });
-    }
-  }
-
   const currentUser = React.useContext(CurrentUserContext);
-
-  const [cards, setCards] = React.useState([]);
-
-  React.useEffect(() => {
-    api
-      .getCards()
-      .then((result) => {
-        setCards(result);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   return (
     <main>
@@ -76,7 +41,7 @@ function Main(props) {
         </button>
       </section>
       <div className="elements">
-        {cards.slice(0, 6).map((element, id) => {
+        {props.cards.slice(0, 6).map((element, id) => {
           return (
             <CurrentUserContext.Provider value={currentUser} key={id}>
               <Card
@@ -85,7 +50,8 @@ function Main(props) {
                 likes={element.likes}
                 owner={element.owner}
                 _id={element._id}
-                onCardLike={handleCardLike}
+                onCardLike={props.onCardLike}
+                onCardDelete={props.onCardDelete}
                 onCardClick={props.onCardClick}
               />
             </CurrentUserContext.Provider>

@@ -1,10 +1,11 @@
 import React from "react";
-
+import PopupWithForm from "./PopupWithForm.js";
 import Header from "./Header.js";
 import Main from "./Main.js";
 import Footer from "./Footer.js";
-import PopupWithForm from "./PopupWithForm.js";
 import ImagePopup from "./ImagePopup.js";
+import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
 import { api } from "../utils/api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import "../index.css";
@@ -16,12 +17,22 @@ function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
+  const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
     api
       .getProfileInformation()
       .then((result) => {
         setCurrentUser(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    api
+      .getCards()
+      .then((result) => {
+        setCards(result);
       })
       .catch((err) => {
         console.log(err);
@@ -51,42 +62,63 @@ function App() {
     setSelectedCard(false);
   }
 
+  function handleUpdateUser(obj) {
+    api.updateProfileInformation(obj.name, obj.about);
+    currentUser.name = obj.name;
+    currentUser.about = obj.about;
+    setCurrentUser(currentUser);
+    closeAllPopups();
+  }
+
+  function handleUpdateAvatar(obj) {
+    api.updateProfilePhoto(obj.avatar);
+    currentUser.avatar = obj.avatar;
+    setCurrentUser(currentUser);
+    closeAllPopups();
+  }
+
+  function handleCardLike(card) {
+    // Verifique mais uma vez se esse cartão já foi curtido
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+
+    // Envie uma solicitação para a API e obtenha os dados do cartão atualizados
+    if (isLiked) {
+      api.unfavoriteCard(card._id).then((newCard) => {
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
+        );
+      });
+    } else {
+      api.favoriteCard(card._id).then((newCard) => {
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
+        );
+      });
+    }
+  }
+
+  function handleCardDelete(card) {
+    api
+      .deleteCard(card._id)
+      .then(setCards(cards.filter((item) => item._id != card._id)));
+  }
+
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
         <div className="main-page">
-          <PopupWithForm
-            name="edit-profile"
-            title="Editar perfil"
+          <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}
-          >
-            <input
-              type="text"
-              id="name"
-              name="name"
-              className="popup__form-input"
-              placeholder="Nome"
-              required=""
-              minLength={2}
-              maxLength={20}
-            />
-            <span className="popup__form-error name-error" />
-            <input
-              type="text"
-              id="job"
-              name="job"
-              className="popup__form-input"
-              placeholder="Sobre mim"
-              required=""
-              minLength={2}
-              maxLength={200}
-            />
-            <span className="popup__form-error job-error" />
-            <button className="popup__save-button popup__save-button_inactive">
-              Salvar
-            </button>
-          </PopupWithForm>
+            onUpdateUser={handleUpdateUser}
+          />
+
+          <EditAvatarPopup
+            isOpen={isEditAvatarPopupOpen}
+            onClose={closeAllPopups}
+            onUpdateAvatar={handleUpdateAvatar}
+          />
+
           <PopupWithForm
             name="add-card"
             title="Novo Local"
@@ -113,29 +145,11 @@ function App() {
               required=""
             />
             <span className="popup__form-error image-url-error" />
-            <button className="popup__save-button popup__add-card-save-button popup__save-button_inactive">
+            <button className="popup__save-button popup__add-card-save-button">
               Salvar
             </button>
           </PopupWithForm>
-          <PopupWithForm
-            name="edit-avatar-photo"
-            title="Alterar a foto de perfil"
-            isOpen={isEditAvatarPopupOpen}
-            onClose={closeAllPopups}
-          >
-            <input
-              type="url"
-              id="new-image-url"
-              name="new-image-url"
-              className="popup__form-input"
-              placeholder="Link da nova imagem"
-              required=""
-            />
-            <span className="popup__form-error new-image-url-error" />
-            <button className="popup__save-button popup__edit-photo-save-button popup__save-button_inactive">
-              Salvar
-            </button>
-          </PopupWithForm>
+
           <PopupWithForm name="confirm-delete" title="Tem certeza?">
             <button className="popup__save-button popup__confirm-delete">
               Sim
@@ -148,6 +162,9 @@ function App() {
             onEditProfileClick={handleEditProfileClick}
             onAddPlaceClick={handleAddPlaceClick}
             onCardClick={handleCardClick}
+            cards={cards}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
           />
           <Footer />
         </div>
