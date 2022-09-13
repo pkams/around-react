@@ -6,6 +6,7 @@ import Footer from "./Footer.js";
 import ImagePopup from "./ImagePopup.js";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
 import { api } from "../utils/api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import "../index.css";
@@ -103,6 +104,13 @@ function App() {
       .then(setCards(cards.filter((item) => item._id != card._id)));
   }
 
+  function handleAddPlaceSubmit(card) {
+    api.createCards(card.title, card.link).then((newCard) => {
+      setCards([newCard, ...cards]);
+    });
+    closeAllPopups();
+  }
+
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
@@ -119,42 +127,18 @@ function App() {
             onUpdateAvatar={handleUpdateAvatar}
           />
 
-          <PopupWithForm
-            name="add-card"
-            title="Novo Local"
+          <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
-          >
-            <input
-              type="text"
-              id="title"
-              name="title"
-              className="popup__form-input"
-              placeholder="Titulo"
-              required=""
-              minLength={2}
-              maxLength={30}
-            />
-            <span className="popup__form-error title-error" />
-            <input
-              type="url"
-              id="image-url"
-              name="image-url"
-              className="popup__form-input"
-              placeholder="Link da imagem"
-              required=""
-            />
-            <span className="popup__form-error image-url-error" />
-            <button className="popup__save-button popup__add-card-save-button">
-              Salvar
-            </button>
-          </PopupWithForm>
+            onAddPlaceSubmit={handleAddPlaceSubmit}
+          />
 
           <PopupWithForm name="confirm-delete" title="Tem certeza?">
             <button className="popup__save-button popup__confirm-delete">
               Sim
             </button>
           </PopupWithForm>
+
           <ImagePopup card={selectedCard} onClose={closeAllPopups} />
           <Header />
           <Main
