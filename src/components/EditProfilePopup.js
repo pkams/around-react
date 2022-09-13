@@ -23,6 +23,9 @@ function EditProfilePopup(props) {
       name,
       about: description,
     });
+
+    document.querySelector("#name").value = "";
+    document.querySelector("#job").value = "";
   }
 
   // Assinatura do contexto

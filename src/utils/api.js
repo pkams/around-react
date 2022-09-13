@@ -1,4 +1,4 @@
-export class Api {
+class Api {
   constructor({ baseUrl, headers }) {
     this.baseUrl = baseUrl;
     this.authorization = headers.authorization;
@@ -140,9 +140,11 @@ export class Api {
   // outros métodos para trabalhar com a API
 }
 
-export const api = new Api({
+const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/web_ptbr_cohort_01",
   headers: {
     authorization: "eec28881-3af1-4bc7-8205-97cb48fed523",
   },
 });
+
+export default api;

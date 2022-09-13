@@ -14,6 +14,9 @@ function AddPlacePopup(props) {
       title,
       link,
     });
+
+    document.querySelector("#title").value = "";
+    document.querySelector("#image-url").value = "";
   }
 
   function handleTitleChange(e) {
