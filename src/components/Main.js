@@ -2,7 +2,6 @@ import React from "react";
 import profileImageEditButton from "../images/edit_profile_picture.svg";
 import profileEditButton from "../images/edit_button.svg";
 import Card from "./Card.js";
-import { api } from "../utils/api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 function Main(props) {
